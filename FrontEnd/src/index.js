@@ -16,49 +16,49 @@ document.addEventListener("keydown", function(e) {
   if (e.repeat) return;
   if (e.key == "ArrowRight") {
     arrRightInt = setInterval(function() {
-      let rotSpeed = 2;
+      let rotSpeed = 3;
       tank2.rotate(rotSpeed);
     }, 20);
   }
   if (e.key == "d") {
     dInt = setInterval(function() {
-      let rotSpeed = 2;
+      let rotSpeed = 3;
       tank1.rotate(rotSpeed);
     }, 20);
   }
   if (e.key == "ArrowLeft") {
     arrLeftInt = setInterval(function() {
-      let rotSpeed = -2;
+      let rotSpeed = -3;
       tank2.rotate(rotSpeed);
     }, 20);
   }
   if (e.key == "a") {
     aInt = setInterval(function() {
-      let rotSpeed = -2;
+      let rotSpeed = -3;
       tank1.rotate(rotSpeed);
     }, 20);
   }
   if (e.key == "ArrowDown") {
     arrDownInt = setInterval(function() {
-      let speed = -2;
+      let speed = -3;
       tank2.move(speed);
     }, 20);
   }
   if (e.key == "ArrowUp") {
     arrUpInt = setInterval(function() {
-      let speed = 2;
+      let speed = 3;
       tank2.move(speed);
     }, 20);
   }
   if (e.key == "s") {
     sInt = setInterval(function() {
-      let speed = -2;
+      let speed = -3;
       tank1.move(speed);
     }, 20);
   }
   if (e.key == "w") {
     wInt = setInterval(function() {
-      let speed = 2;
+      let speed = 3;
       tank1.move(speed);
     }, 20);
   }

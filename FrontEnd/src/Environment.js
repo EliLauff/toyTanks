@@ -10,7 +10,32 @@ let height = gameDiv.clientHeight;
 let width = gameDiv.clientWidth;
 let barrierHeight = height - 434;
 let barrierWidth = width - 310;
-console.log("hi");
+const PLAYABLE_HEIGHT = height - 71;
+const PLAYABLE_WIDTH = width - 44;
+
+const SOUTHWEST_CORNER = document.createElement("img");
+SOUTHWEST_CORNER.style.position = "absolute";
+SOUTHWEST_CORNER.src = `${ASSET_ROOT}/bobby.png`;
+SOUTHWEST_CORNER.style.width = "1px";
+SOUTHWEST_CORNER.style.left = "44px";
+SOUTHWEST_CORNER.style.top = `${PLAYABLE_HEIGHT}px`;
+gameDiv.append(SOUTHWEST_CORNER);
+
+const NORTHWEST_CORNER = document.createElement("img");
+NORTHWEST_CORNER.style.position = "absolute";
+NORTHWEST_CORNER.src = `${ASSET_ROOT}/bobby.png`;
+NORTHWEST_CORNER.style.width = "1px";
+NORTHWEST_CORNER.style.left = "44px";
+NORTHWEST_CORNER.style.top = `49px`;
+gameDiv.append(NORTHWEST_CORNER);
+
+const NORTHEAST_CORNER = document.createElement("img");
+NORTHEAST_CORNER.style.position = "absolute";
+NORTHEAST_CORNER.src = `${ASSET_ROOT}/bobby.png`;
+NORTHEAST_CORNER.style.width = "1px";
+NORTHEAST_CORNER.style.left = `${PLAYABLE_WIDTH}px`;
+NORTHEAST_CORNER.style.top = `49px`;
+gameDiv.append(NORTHEAST_CORNER);
 
 function background() {
   let imgSrc = `${ASSET_ROOT}/Environment/sand.png`;

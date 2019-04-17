@@ -62,7 +62,7 @@ function doPolygonsIntersect(a, b) {
 function remedyMovement() {
   if (arrRightInt !== null) {
     let leftInt = setInterval(function() {
-      let rotSpeed = -2;
+      let rotSpeed = -3;
       tank2.rotate(rotSpeed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -77,7 +77,7 @@ function remedyMovement() {
   }
   if (arrLeftInt !== null) {
     let rightInt = setInterval(function() {
-      let rotSpeed = 2;
+      let rotSpeed = 3;
       tank2.rotate(rotSpeed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -92,7 +92,7 @@ function remedyMovement() {
   }
   if (dInt !== null) {
     let leftInt = setInterval(function() {
-      let rotSpeed = -2;
+      let rotSpeed = -3;
       tank1.rotate(rotSpeed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -107,7 +107,7 @@ function remedyMovement() {
   }
   if (aInt !== null) {
     let rightInt = setInterval(function() {
-      let rotSpeed = 2;
+      let rotSpeed = 3;
       tank1.rotate(rotSpeed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -122,7 +122,7 @@ function remedyMovement() {
   }
   if (arrDownInt !== null) {
     let upInt = setInterval(function() {
-      let speed = 8;
+      let speed = 10;
       tank2.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -137,7 +137,7 @@ function remedyMovement() {
   }
   if (arrUpInt !== null) {
     let downInt = setInterval(function() {
-      let speed = -8;
+      let speed = -10;
       tank2.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -152,7 +152,7 @@ function remedyMovement() {
   }
   if (sInt !== null) {
     let upInt = setInterval(function() {
-      let speed = 8;
+      let speed = 10;
       tank1.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -167,7 +167,7 @@ function remedyMovement() {
   }
   if (wInt !== null) {
     let downInt = setInterval(function() {
-      let speed = -8;
+      let speed = -10;
       tank1.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();

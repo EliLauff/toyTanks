@@ -105,8 +105,8 @@ class Tank {
     let newBullet = new Bullet(this.color, this);
 
     let bulletInt = setInterval(function() {
-      let x_comp = 6 * Math.sin(newBullet.direction * 0.0174533);
-      let y_comp = 6 * Math.cos(newBullet.direction * 0.0174533);
+      let x_comp = 8 * Math.sin(newBullet.direction * 0.0174533);
+      let y_comp = 8 * Math.cos(newBullet.direction * 0.0174533);
       let leftPos = parseFloat(newBullet.bulletCenter.style.left);
       let topPos = parseFloat(newBullet.bulletCenter.style.top);
       newBullet.bulletCenter.style.left = `${leftPos + x_comp}px`;
