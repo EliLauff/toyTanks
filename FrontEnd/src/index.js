@@ -1,88 +1,126 @@
+<<<<<<< HEAD
 
+=======
+//create two tanks, red is player 1, blue is player 2
+>>>>>>> bulletPhysics
 tank1 = new Tank("red", 1);
 tank2 = new Tank("blue", 2);
 
-setInterval(function() {
-  tank1.move();
-  tank2.move();
-  tank1.tankImg.style.transform = `rotate(${tank1.direction - 90}deg)`;
-  tank2.tankImg.style.transform = `rotate(${tank2.direction - 90}deg)`;
-}, 20);
+//create movement interval variables and set them to null
+let arrRightInt = null;
+let arrLeftInt = null;
+let aInt = null;
+let dInt = null;
+let arrUpInt = null;
+let arrDownInt = null;
+let wInt = null;
+let sInt = null;
 
-let arrRightInt;
-let arrLeftInt;
-let aInt;
-let dInt;
-
+//add event listeners to create movement setIntervals or clear them based on player input
 document.addEventListener("keydown", function(e) {
-  console.log(tank1.direction);
   if (e.repeat) return;
   if (e.key == "ArrowRight") {
     arrRightInt = setInterval(function() {
-      tank2.direction = tank2.direction + 3;
-    }, 30);
+      let rotSpeed = 2;
+      tank2.rotate(rotSpeed);
+    }, 20);
   }
   if (e.key == "d") {
     dInt = setInterval(function() {
-      tank1.direction = tank1.direction + 3;
-    }, 30);
+      let rotSpeed = 2;
+      tank1.rotate(rotSpeed);
+    }, 20);
   }
   if (e.key == "ArrowLeft") {
     arrLeftInt = setInterval(function() {
-      tank2.direction = tank2.direction - 3;
-    }, 30);
+      let rotSpeed = -2;
+      tank2.rotate(rotSpeed);
+    }, 20);
   }
   if (e.key == "a") {
     aInt = setInterval(function() {
-      tank1.direction = tank1.direction - 3;
-    }, 30);
+      let rotSpeed = -2;
+      tank1.rotate(rotSpeed);
+    }, 20);
   }
   if (e.key == "ArrowDown") {
-    tank2.speed = -2;
-  }
-  if (e.key == "s") {
-    tank1.speed = -2;
+    arrDownInt = setInterval(function() {
+      let speed = -2;
+      tank2.move(speed);
+    }, 20);
   }
   if (e.key == "ArrowUp") {
-    tank2.speed = 2;
+    arrUpInt = setInterval(function() {
+      let speed = 2;
+      tank2.move(speed);
+    }, 20);
+  }
+  if (e.key == "s") {
+    sInt = setInterval(function() {
+      let speed = -2;
+      tank1.move(speed);
+    }, 20);
   }
   if (e.key == "w") {
-    tank1.speed = 2;
+    wInt = setInterval(function() {
+      let speed = 2;
+      tank1.move(speed);
+    }, 20);
   }
+
   if (e.key == "Alt") {
     tank2.fire();
   }
   if (e.key == "e") {
     tank1.fire();
   }
-  // console.log(e.key);
 });
 
 document.addEventListener("keyup", function(e) {
-  console.log(tank1.direction);
   if (e.repeat) return;
   if (e.key == "ArrowRight") {
     clearInterval(arrRightInt);
+    arrRightInt = null;
   }
   if (e.key == "ArrowLeft") {
     clearInterval(arrLeftInt);
+    arrLeftInt = null;
   }
   if (e.key == "a") {
     clearInterval(aInt);
+    aInt = null;
   }
   if (e.key == "d") {
     clearInterval(dInt);
+    dInt = null;
   }
   if (e.key == "ArrowDown") {
-    tank2.speed = 0;
-  }
-  if (e.key == "s") {
-    tank1.speed = 0;
+    clearInterval(arrDownInt);
+    arrDownInt = null;
   }
   if (e.key == "ArrowUp") {
-    tank2.speed = 0;
+    clearInterval(arrUpInt);
+    arrUpInt = null;
+  }
+  if (e.key == "s") {
+    clearInterval(sInt);
+    sInt = null;
   }
   if (e.key == "w") {
-    tank1.speed = 0;
+    clearInterval(wInt);
+    wInt = null;
   }
 });
+
+//interval to update rotation of tanks and check for collision. If collision occurs, create a "bouncing" effect.
+setInterval(function() {
+  tank1.tankDiv.style.transform = `rotate(${tank1.direction - 90}deg)`;
+  tank2.tankDiv.style.transform = `rotate(${tank2.direction - 90}deg)`;
+
+  tank1.updatePoints();
+  tank2.updatePoints();
+
+  if (doPolygonsIntersect(tank1.points, tank2.points)) {
+    remedyMovement();
+  }
+}, 20);

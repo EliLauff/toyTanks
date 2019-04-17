@@ -1,15 +1,22 @@
-<style type = 'text/css'>
-  body, html {
-      height: 100%;
-      margin: 0px;
-    }
+<style type="text/css">
+  body,
+  html {
+    height: 100%;
+    margin: 0px;
+  }
 
   #menu_window {
-    float: right; width: 10%; height: 98%; border:thick solid blue; position: relative; 
-    }
+    float: right;
+    width: 10%;
+    height: 98%;
+    border: thick solid blue;
+    position: relative;
+  }
 
   #game_window {
-    float: left; width: 89%; height: 100%;
+    float: left;
+    width: 89%;
+    height: 100%;
   }
 
   #center {
@@ -18,7 +25,6 @@
     left: 50%;
     width: 44px;
     height: 80%;
-   
   }
 
   #topSideways {
@@ -26,43 +32,27 @@
     transform: "rotate(90deg)";
     right: 50%;
     top: 24%;
-    
   }
   #bottomSideways {
     position: absolute;
     transform: "rotate(90deg)";
     left: 51%;
-    
   }
 </style>
 
-
-
-
-
-
 <html>
-<body>
-    <div id = "game_window" style="position: absolute">
-      <div id = "center" >
-      
-      </div>
-      <div id = "topSideways">
-
-      </div>
-      <div id = "bottomSideways">
-
-      </div>
+  <body>
+    <div id="game_window" style="position: absolute">
+      <div id="center"></div>
+      <div id="topSideways"></div>
+      <div id="bottomSideways"></div>
     </div>
 
-    <div id = "menu_window">
-
-    </div>
-    
-  
-</body>
-<script type="text/javascript" src='src/Environment.js'></script>
-<script type="text/javascript" src='src/Tank.js'></script>
-<script type="text/javascript" src='src/Bullet.js'></script>
-<script type="text/javascript" src='src/index.js'></script>
+    <div id="menu_window"></div>
+  </body>
+  <script type="text/javascript" src="src/Environment.js"></script>
+  <script type="text/javascript" src="src/collision.js"></script>
+  <script type="text/javascript" src="src/Tank.js"></script>
+  <script type="text/javascript" src="src/Bullet.js"></script>
+  <script type="text/javascript" src="src/index.js"></script>
 </html>
