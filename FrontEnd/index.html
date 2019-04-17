@@ -1,9 +1,51 @@
+<style type = 'text/css'>
+  body, html {
+      height: 100%;
+      margin: 0px;
+    }
+
+  #menu_window {
+    float: right; width: 10%; height: 98%; border:thick solid blue; position: relative; 
+    }
+
+  #game_window {
+    float: left; width: 89%; height: 100%;
+  }
+
+  #center {
+    position: absolute;
+   top: 25%;
+   left: 50%;
+   width: 44px;
+   height: 62px;
+   
+  }
+
+
+
+</style>
+
+
+
+
+
+
 <html>
-  <body>
+<body>
+    <div id = "game_window" style="position: absolute">
+      <div id = "center" >
+      
       </div>
-      <script type="text/javascript" src='src/Tank.js'></script>
-      <script type="text/javascript" src='src/Bullet.js'></script>
-      <script type="text/javascript" src='src/index.js'></script>
-      </body>
-  </body>
+    </div>
+
+    <div id = "menu_window">
+
+    </div>
+    
+  
+</body>
+<script type="text/javascript" src='src/Environment.js'></script>
+<script type="text/javascript" src='src/Tank.js'></script>
+<script type="text/javascript" src='src/Bullet.js'></script>
+<script type="text/javascript" src='src/index.js'></script>
 </html>
