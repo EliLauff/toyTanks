@@ -1,4 +1,3 @@
-const ASSET_ROOT = "./assets";
 class Tank {
   constructor(color, player) {
     this.color = color.charAt(0).toUpperCase() + color.slice(1);
@@ -33,8 +32,7 @@ class Tank {
     this.tankDiv.append(this.tankBarrel);
     this.tankDiv.style.transform = `rotate(${this.direction}deg)`;
 
-    this.barrelCenter = document.createElement("img");
-    this.barrelCenter.src = `${ASSET_ROOT}/bobby.png`;
+    this.barrelCenter = document.createElement("div");
     this.barrelCenter.style.position = "absolute";
     this.barrelCenter.style.width = "0px";
     this.barrelCenter.style.left = "80px";
@@ -103,7 +101,17 @@ class Tank {
   }
 
   fire() {
-    let bullet = new Bullet(this.color, this);
+    console.log("fire!!!");
+    let newBullet = new Bullet(this.color, this);
+
+    let bulletInt = setInterval(function() {
+      let x_comp = 6 * Math.sin(newBullet.direction * 0.0174533);
+      let y_comp = 6 * Math.cos(newBullet.direction * 0.0174533);
+      let leftPos = parseFloat(newBullet.bulletCenter.style.left);
+      let topPos = parseFloat(newBullet.bulletCenter.style.top);
+      newBullet.bulletCenter.style.left = `${leftPos + x_comp}px`;
+      newBullet.bulletCenter.style.top = `${topPos - y_comp}px`;
+    }, 20);
   }
 
   updatePoints() {
