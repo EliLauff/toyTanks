@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-=======
-//create two tanks, red is player 1, blue is player 2
->>>>>>> bulletPhysics
 tank1 = new Tank("red", 1);
 tank2 = new Tank("blue", 2);
 
