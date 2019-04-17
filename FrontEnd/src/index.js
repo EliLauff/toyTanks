@@ -67,7 +67,7 @@ document.addEventListener("keydown", function(e) {
   if (e.key == "Alt") {
     tank2.fire();
   }
-  if (e.key == "e") {
+  if (e.key == "Control") {
     tank1.fire();
   }
 });

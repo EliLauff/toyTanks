@@ -10,7 +10,7 @@ let barrierWidth = width - 310;
 console.log("hi");
 
 function background() {
-  let imgSrc = `${ASSET_ROOT}/Environment/dirt.png`;
+  let imgSrc = `${ASSET_ROOT}/Environment/sand.png`;
   let counter = 0;
   let ticker = 0;
   while (ticker <= height + 128) {
