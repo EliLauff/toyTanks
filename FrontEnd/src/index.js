@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-//create two tanks, red is player 1, blue is player 2
-=======
->>>>>>> addingmap
 tank1 = new Tank("red", 1);
 tank2 = new Tank("blue", 2);
 
@@ -70,7 +66,7 @@ document.addEventListener("keydown", function(e) {
   if (e.key == "Alt") {
     tank2.fire();
   }
-  if (e.key == "e") {
+  if (e.key == "Control") {
     tank1.fire();
   }
 });
