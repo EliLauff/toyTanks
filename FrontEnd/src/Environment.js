@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const ASSET_ROOT = "./assets";
 let gameDiv = document.querySelector("#game_window");
 let verticalObstacleDiv = document.querySelector("#center");
@@ -8,6 +9,19 @@ let width = gameDiv.clientWidth;
 let barrierHeight = height - 434;
 let barrierWidth = width - 310;
 console.log("hi");
+=======
+let gameDiv = document.querySelector("#game_window")
+let verticalObstacleDiv = document.querySelector("#center")
+let leftDiv = document.querySelector("#left")
+let rightDiv = document.querySelector("#right")
+let horozontalObstacleDiv = document.querySelector("#topSideways")
+let bottomHorozontalObstacleDiv = document.querySelector("#bottomSideways")
+let height = gameDiv.clientHeight
+let width = gameDiv.clientWidth
+let barrierHeight = height - 434
+let barrierWidth = width - 310
+console.log("hi")
+>>>>>>> addingmap
 
 function background() {
   let imgSrc = `${ASSET_ROOT}/Environment/dirt.png`;
@@ -75,6 +89,7 @@ function border() {
     i++;
   }
 }
+<<<<<<< HEAD
 border();
 
 function verticalLayout() {
@@ -121,3 +136,6 @@ function randomMap() {
   randMap();
 }
 randomMap();
+=======
+border()
+>>>>>>> addingmap
