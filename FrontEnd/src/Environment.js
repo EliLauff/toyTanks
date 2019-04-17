@@ -1,8 +1,11 @@
 let gameDiv = document.querySelector("#game_window")
-let obstacleDiv = document.querySelector("#center")
+let verticalObstacleDiv = document.querySelector("#center")
+let horozontalObstacleDiv = document.querySelector("#topSideways")
+let bottomHorozontalObstacleDiv = document.querySelector("#bottomSideways")
 let height = gameDiv.clientHeight
 let width = gameDiv.clientWidth
 let barrierHeight = height - 434
+let barrierWidth = width - 310
 console.log("hi")
 
 function border(){
@@ -50,27 +53,54 @@ function border(){
 }
 border()
 
-function obstacleLayout() {
-    let y = 0;
+function verticalLayout() {
+   
     let obstacleHeight = 0;
     while(obstacleHeight < barrierHeight) {
         const metalBarrelObstable = document.createElement("img");
         metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png"
-        obstacleDiv.append(metalBarrelObstable)
-        obstacleHeight += 66
+        verticalObstacleDiv.append(metalBarrelObstable)
+        obstacleHeight += 62
     }   
 }
 
-// function obstacleLayout() {
-//     let y = 0;
-//     let obstacleHeight = 0;
-//     while(obstacleHeight < barrierHeight) {
-//         const metalBarrelObstable = document.createElement("img");
-//         metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png"
-//         obstacleDiv.append(metalBarrelObstable)
-//         obstacleHeight += 66
-//     }   
-// }
+function sLayout() {
+    let obstacleHeight = 0;
+    let topObstacleWidth = 0
+    let bottomObstacleWidth = 0
+    while(obstacleHeight < barrierHeight) {
+        const metalBarrelObstable = document.createElement("img");
+        metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png"
+        verticalObstacleDiv.append(metalBarrelObstable)
+        obstacleHeight += 62
+    }
+    while(topObstacleWidth < barrierWidth) {
+        const metalBarrelObstable = document.createElement("img");
+        metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png"
+        metalBarrelObstable.style.transform = "rotate(90deg)";
+        horozontalObstacleDiv.append(metalBarrelObstable)
+        topObstacleWidth += 200
+    }
+    while(bottomObstacleWidth < barrierWidth) {
+        bottomHorozontalObstacleDiv.style.top =  height * .25  + barrierHeight
+        const metalBarrelObstable = document.createElement("img");
+        metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png"
+        metalBarrelObstable.style.transform = "rotate(90deg)";
+        bottomHorozontalObstacleDiv.append(metalBarrelObstable)
+        bottomObstacleWidth += 200
+    }
+}
 
-functionArray = [obstacleLayout]
-functionArray[0]()
+functionArray = [verticalLayout, sLayout]
+
+function randomMap() {
+    let randMap = functionArray[Math.floor(Math.random() * functionArray.length)];
+    randMap()
+}
+randomMap()
+
+
+
+
+
+
