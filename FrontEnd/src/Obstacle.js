@@ -73,7 +73,6 @@ randomMap();
 
 if (LAYOUT_CONFIG === "verticalLayout") {
   let centerDiv = document.getElementById("center");
-  console.log(centerDiv.getBoundingClientRect());
   let centerWidth = 44;
   let centerLeft = centerDiv.getBoundingClientRect().left;
   let centerTop = centerDiv.getBoundingClientRect().top;
@@ -112,7 +111,6 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   gameDiv.append(centerFour);
 } else if (LAYOUT_CONFIG === "sLayout") {
   let centerDiv = document.getElementById("center");
-  console.log(centerDiv.getBoundingClientRect());
   let centerWidth = 44;
   let centerLeft = centerDiv.getBoundingClientRect().left;
   let centerTop = centerDiv.getBoundingClientRect().top;
@@ -151,7 +149,6 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   gameDiv.append(centerFour);
 
   let topDiv = document.getElementById("topSideways");
-  console.log(topDiv.getBoundingClientRect());
   let topHeight = 44;
   let topLeft = topDiv.getBoundingClientRect().left;
   let topTop = topDiv.getBoundingClientRect().top;
@@ -190,7 +187,6 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   gameDiv.append(topFour);
 
   let bottomDiv = document.getElementById("bottomSideways");
-  console.log(bottomDiv.getBoundingClientRect());
   let bottomHeight = 44;
   let bottomLeft = bottomDiv.getBoundingClientRect().left;
   let bottomTop = bottomDiv.getBoundingClientRect().top;
@@ -229,7 +225,6 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   gameDiv.append(bottomFour);
 } else if (LAYOUT_CONFIG === "chaos") {
   let centerDiv = document.getElementById("center");
-  console.log(centerDiv.getBoundingClientRect());
   let centerWidth = 44;
   let centerLeft = centerDiv.getBoundingClientRect().left;
   let centerTop = centerDiv.getBoundingClientRect().top;
@@ -267,8 +262,7 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   centerFour.style.top = `${centerTop + centerHeight}px`;
   gameDiv.append(centerFour);
 
-  let leftDiv = document.getElementById("left");
-  console.log(leftDiv.getBoundingClientRect());
+  let leftDiv = document.getElementById("left");]
   let leftWidth = 44;
   let leftLeft = leftDiv.getBoundingClientRect().left;
   let leftTop = leftDiv.getBoundingClientRect().top;
@@ -307,7 +301,6 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   gameDiv.append(leftFour);
 
   let rightDiv = document.getElementById("right");
-  console.log(rightDiv.getBoundingClientRect());
   let rightWidth = 44;
   let rightLeft = rightDiv.getBoundingClientRect().left;
   let rightTop = rightDiv.getBoundingClientRect().top;

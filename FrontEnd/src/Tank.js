@@ -3,6 +3,8 @@ class Tank {
     this.color = color.charAt(0).toUpperCase() + color.slice(1);
     this.player = player;
     this.lives = 3;
+    this.stockpile = 3;
+    this.shootLocked = false;
 
     this.tankDiv = document.createElement("div");
     this.tankDiv.style.position = "absolute";
@@ -100,29 +102,44 @@ class Tank {
     this.direction = this.direction + rotSpeed;
   }
 
+  shoot() {
+    if (this.shootLocked === false) {
+      this.shootLocked = true;
+      setTimeout(() => {
+        this.shootLocked = false;
+      }, 500);
+      this.fire();
+    }
+  }
+
   fire() {
-    console.log("fire!!!");
-    let newBullet = new Bullet(this.color, this);
+    if (this.stockpile > 0) {
+      let newBullet = new Bullet(this.color, this);
 
-    let bulletInt = setInterval(function() {
-      let x_comp = 8 * Math.sin(newBullet.direction * 0.0174533);
-      let y_comp = 8 * Math.cos(newBullet.direction * 0.0174533);
-      let leftPos = parseFloat(newBullet.bulletCenter.style.left);
-      let topPos = parseFloat(newBullet.bulletCenter.style.top);
-      newBullet.bulletCenter.style.left = `${leftPos + x_comp}px`;
-      newBullet.bulletCenter.style.top = `${topPos - y_comp}px`;
-    }, 20);
+      let bulletInt = setInterval(function() {
+        let x_comp = 8 * Math.sin(newBullet.direction * 0.0174533);
+        let y_comp = 8 * Math.cos(newBullet.direction * 0.0174533);
+        let leftPos = parseFloat(newBullet.bulletCenter.style.left);
+        let topPos = parseFloat(newBullet.bulletCenter.style.top);
+        newBullet.bulletCenter.style.left = `${leftPos + x_comp}px`;
+        newBullet.bulletCenter.style.top = `${topPos - y_comp}px`;
+      }, 20);
 
-    let explosion = document.createElement("img");
-    explosion.src = `${ASSET_ROOT}/Smoke/smokeGrey4.png`;
-    explosion.style.position = "absolute";
-    explosion.style.width = "40px";
-    explosion.style.left = `${this.barrelCenter.getBoundingClientRect().x -
-      20}px`;
-    explosion.style.top = `${this.barrelCenter.getBoundingClientRect().y -
-      20}px`;
+      let explosion = document.createElement("img");
+      explosion.src = `${ASSET_ROOT}/Smoke/smokeGrey4.png`;
+      explosion.style.position = "absolute";
+      explosion.style.width = "40px";
+      explosion.style.left = `${this.barrelCenter.getBoundingClientRect().x -
+        20}px`;
+      explosion.style.top = `${this.barrelCenter.getBoundingClientRect().y -
+        20}px`;
 
-    gameDiv.append(explosion);
+      gameDiv.append(explosion);
+      this.stockpile -= 1;
+      setTimeout(() => {
+        this.stockpile += 1;
+      }, 1000);
+    }
   }
 
   updatePoints() {
@@ -178,8 +195,28 @@ class Tank {
     }
   }
 
+  static clearIntervals() {
+    clearInterval(arrRightInt);
+    clearInterval(arrLeftInt);
+    clearInterval(aInt);
+    clearInterval(dInt);
+    clearInterval(arrUpInt);
+    clearInterval(arrDownInt);
+    clearInterval(wInt);
+    clearInterval(sInt);
+    arrRightInt = null;
+    arrLeftInt = null;
+    aInt = null;
+    dInt = null;
+    arrUpInt = null;
+    arrDownInt = null;
+    wInt = null;
+    sInt = null;
+  }
+
   loseLife() {
     this.lives -= 1;
+    Tank.clearIntervals();
     if (this.lives === 0) {
       (livesDiv.innerHTML = ""),
         tank1.setLives(),
@@ -200,6 +237,11 @@ class Tank {
       tank1.setLives();
       tank2.setLives();
     }
+    allBullets = [];
+    let bulletsToClear = document.querySelectorAll(".bullet");
+    bulletsToClear.forEach(bullet => {
+      bullet.remove();
+    });
   }
 
   loseGame() {
@@ -211,46 +253,4 @@ class Tank {
     }
     //render welcome page
   }
-
-  //   fire() {
-  //     bottomPos = parseInt(this.style.bottom);asa
-  //     leftPos = parseInt(this.style.left);
-  //     console.log("fire!!");
-  //     bullet = document.createElement("img");
-  //     bullet.src = `${ASSET_ROOT}/Bullets/bulletRedSilver_outline.png`;
-  //     document.body.append(bullet);
-  //     bullet.style.position = "absolute";
-  //     bullet.style.left = `${leftPos + 39}px`;
-  //     bullet.style.bottom = `${bottomPos + 39}px`;
-  //     bullet_speed = 10;
-  //     if (left === true && up === true) {
-  //       bullet_direction = "northwest";
-  //       let interval = setInterval(function() {
-  //         bulletLeft = parseInt(bullet.style.left);
-  //         bulletBottom = parseInt(bullet.style.bottom);
-  //         bullet.style.left = `${bulletLeft - bullet_speed}px`;
-  //         bullet.style.bottom = `${bulletBottom + bullet_speed}px`;
-  //       }, 20);
-  //       setTimeout(function() {
-  //         clearInterval(interval);
-  //       }, 3000);
-  //       bullet.style.left = `${bulletLeft - bullet_speed}px`;
-  //       bullet.style.bottom = `${bulletBottom + bullet_speed}px`;
-  //     } else if (left === true && down === true) {
-  //       bullet_direction = "southwest";
-  //     } else if (right === true && up === true) {
-  //       bullet_direction = "northeast";
-  //     } else if (right === true && down === true) {
-  //       m;
-  //       bullet_direction = "southeast";
-  //     } else if (right === true) {
-  //       bullet_direction = "east";
-  //     } else if (left === true) {
-  //       bullet_direction = "west";
-  //     } else if (up === true) {
-  //       bullet_direction = "north";
-  //     } else if (down === true) {
-  //       bullet_direction = "south";
-  //     }
-  //   }
 }
