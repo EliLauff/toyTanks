@@ -8,12 +8,12 @@ class Tank {
     this.tankDiv.style.position = "absolute";
     if (this.player === 1) {
       this.direction = 0;
-      this.tankDiv.style.left = "200px";
-      this.tankDiv.style.bottom = "100px";
+      this.tankDiv.style.left = "150px";
+      this.tankDiv.style.bottom = "150px";
     } else {
       this.direction = -180;
-      this.tankDiv.style.left = "1000px";
-      this.tankDiv.style.bottom = "800px";
+      this.tankDiv.style.left = `${width - 250}px`;
+      this.tankDiv.style.bottom = `${height - 250}px`;
     }
     this.speed = 0;
 
@@ -27,7 +27,7 @@ class Tank {
     this.tankBarrel.style.top = "34px";
     this.tankBarrel.style.transform = "rotate(90deg)";
 
-    document.body.append(this.tankDiv);
+    gameDiv.append(this.tankDiv);
     this.tankDiv.append(this.tankImg);
     this.tankDiv.append(this.tankBarrel);
     this.tankDiv.style.transform = `rotate(${this.direction}deg)`;

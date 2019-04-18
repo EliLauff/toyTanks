@@ -13,6 +13,7 @@ let sInt = null;
 
 //add event listeners to create movement setIntervals or clear them based on player input
 document.addEventListener("keydown", function(e) {
+  e.preventDefault();
   if (e.repeat) return;
   if (e.key == "ArrowRight") {
     arrRightInt = setInterval(function() {
@@ -20,7 +21,7 @@ document.addEventListener("keydown", function(e) {
       tank2.rotate(rotSpeed);
     }, 20);
   }
-  if (e.key == "d") {
+  if (e.key == "d" || e.key == "D") {
     dInt = setInterval(function() {
       let rotSpeed = 3;
       tank1.rotate(rotSpeed);
@@ -32,7 +33,7 @@ document.addEventListener("keydown", function(e) {
       tank2.rotate(rotSpeed);
     }, 20);
   }
-  if (e.key == "a") {
+  if (e.key == "a" || e.key == "A") {
     aInt = setInterval(function() {
       let rotSpeed = -3;
       tank1.rotate(rotSpeed);
@@ -50,23 +51,23 @@ document.addEventListener("keydown", function(e) {
       tank2.move(speed);
     }, 20);
   }
-  if (e.key == "s") {
+  if (e.key == "s" || e.key == "S") {
     sInt = setInterval(function() {
       let speed = -3;
       tank1.move(speed);
     }, 20);
   }
-  if (e.key == "w") {
+  if (e.key == "w" || e.key == "W") {
     wInt = setInterval(function() {
       let speed = 3;
       tank1.move(speed);
     }, 20);
   }
 
-  if (e.key == "Alt") {
+  if (e.key == "Shift") {
     tank2.fire();
   }
-  if (e.key == "Control") {
+  if (e.key == "e" || e.key == "E") {
     tank1.fire();
   }
 });
@@ -81,11 +82,11 @@ document.addEventListener("keyup", function(e) {
     clearInterval(arrLeftInt);
     arrLeftInt = null;
   }
-  if (e.key == "a") {
+  if (e.key == "a" || e.key == "A") {
     clearInterval(aInt);
     aInt = null;
   }
-  if (e.key == "d") {
+  if (e.key == "d" || e.key == "D") {
     clearInterval(dInt);
     dInt = null;
   }
@@ -97,11 +98,11 @@ document.addEventListener("keyup", function(e) {
     clearInterval(arrUpInt);
     arrUpInt = null;
   }
-  if (e.key == "s") {
+  if (e.key == "s" || e.key == "S") {
     clearInterval(sInt);
     sInt = null;
   }
-  if (e.key == "w") {
+  if (e.key == "w" || e.key == "W") {
     clearInterval(wInt);
     wInt = null;
   }
@@ -116,6 +117,32 @@ setInterval(function() {
   tank2.updatePoints();
 
   if (doPolygonsIntersect(tank1.points, tank2.points)) {
-    remedyMovement();
+    remedyTank1Movement();
+    remedyTank2Movement();
+  }
+
+  if (doPolygonsIntersect(TOP_POINTS, tank1.points)) {
+    remedyTank1Movement(TOP_POINTS);
+  }
+  if (doPolygonsIntersect(BOTTOM_POINTS, tank1.points)) {
+    remedyTank1Movement(BOTTOM_POINTS);
+  }
+  if (doPolygonsIntersect(LEFT_POINTS, tank1.points)) {
+    remedyTank1Movement(LEFT_POINTS);
+  }
+  if (doPolygonsIntersect(RIGHT_POINTS, tank1.points)) {
+    remedyTank1Movement(RIGHT_POINTS);
+  }
+  if (doPolygonsIntersect(TOP_POINTS, tank2.points)) {
+    remedyTank2Movement(TOP_POINTS);
+  }
+  if (doPolygonsIntersect(BOTTOM_POINTS, tank2.points)) {
+    remedyTank2Movement(BOTTOM_POINTS);
+  }
+  if (doPolygonsIntersect(LEFT_POINTS, tank2.points)) {
+    remedyTank2Movement(LEFT_POINTS);
+  }
+  if (doPolygonsIntersect(RIGHT_POINTS, tank2.points)) {
+    remedyTank2Movement(RIGHT_POINTS);
   }
 }, 20);

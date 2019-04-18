@@ -8,34 +8,52 @@ let horozontalObstacleDiv = document.querySelector("#topSideways");
 let bottomHorozontalObstacleDiv = document.querySelector("#bottomSideways");
 let height = gameDiv.clientHeight;
 let width = gameDiv.clientWidth;
-let barrierHeight = height - 434;
-let barrierWidth = width - 310;
-const PLAYABLE_HEIGHT = height - 71;
+// let barrierHeight = height - 434;
+let barrierHeight = 0.55 * height;
+let barrierWidth = 0.2 * width;
+const PLAYABLE_HEIGHT = height - 52;
 const PLAYABLE_WIDTH = width - 44;
 
-const SOUTHWEST_CORNER = document.createElement("img");
+const SOUTHWEST_CORNER = document.createElement("div");
 SOUTHWEST_CORNER.style.position = "absolute";
-SOUTHWEST_CORNER.src = `${ASSET_ROOT}/bobby.png`;
-SOUTHWEST_CORNER.style.width = "1px";
+SOUTHWEST_CORNER.style.width = "0px";
 SOUTHWEST_CORNER.style.left = "44px";
 SOUTHWEST_CORNER.style.top = `${PLAYABLE_HEIGHT}px`;
 gameDiv.append(SOUTHWEST_CORNER);
+const SW_X = SOUTHWEST_CORNER.getBoundingClientRect().x;
+const SW_Y = SOUTHWEST_CORNER.getBoundingClientRect().y;
 
-const NORTHWEST_CORNER = document.createElement("img");
+const NORTHWEST_CORNER = document.createElement("div");
 NORTHWEST_CORNER.style.position = "absolute";
-NORTHWEST_CORNER.src = `${ASSET_ROOT}/bobby.png`;
-NORTHWEST_CORNER.style.width = "1px";
+NORTHWEST_CORNER.style.width = "0px";
 NORTHWEST_CORNER.style.left = "44px";
-NORTHWEST_CORNER.style.top = `49px`;
+NORTHWEST_CORNER.style.top = `52px`;
 gameDiv.append(NORTHWEST_CORNER);
+const NW_X = NORTHWEST_CORNER.getBoundingClientRect().x;
+const NW_Y = NORTHWEST_CORNER.getBoundingClientRect().y;
 
-const NORTHEAST_CORNER = document.createElement("img");
+const NORTHEAST_CORNER = document.createElement("div");
 NORTHEAST_CORNER.style.position = "absolute";
-NORTHEAST_CORNER.src = `${ASSET_ROOT}/bobby.png`;
-NORTHEAST_CORNER.style.width = "1px";
+NORTHEAST_CORNER.style.width = "0px";
 NORTHEAST_CORNER.style.left = `${PLAYABLE_WIDTH}px`;
-NORTHEAST_CORNER.style.top = `49px`;
+NORTHEAST_CORNER.style.top = `52px`;
 gameDiv.append(NORTHEAST_CORNER);
+const NE_X = NORTHEAST_CORNER.getBoundingClientRect().x;
+const NE_Y = NORTHEAST_CORNER.getBoundingClientRect().y;
+
+const SOUTHEAST_CORNER = document.createElement("div");
+SOUTHEAST_CORNER.style.position = "absolute";
+SOUTHEAST_CORNER.style.width = "0px";
+SOUTHEAST_CORNER.style.left = `${PLAYABLE_WIDTH}px`;
+SOUTHEAST_CORNER.style.top = `${PLAYABLE_HEIGHT}`;
+gameDiv.append(SOUTHEAST_CORNER);
+const SE_X = SOUTHEAST_CORNER.getBoundingClientRect().x;
+const SE_Y = SOUTHEAST_CORNER.getBoundingClientRect().y;
+
+const TOP_POINTS = [{ x: NW_X, y: NW_Y }, { x: NE_X, y: NE_Y }];
+const BOTTOM_POINTS = [{ x: SW_X, y: SW_Y }, { x: SE_X, y: SE_Y }];
+const LEFT_POINTS = [{ x: NW_X, y: NW_Y }, { x: SW_X, y: SW_Y }];
+const RIGHT_POINTS = [{ x: NE_X, y: NE_Y }, { x: SE_X, y: SE_Y }];
 
 function background() {
   let imgSrc = `${ASSET_ROOT}/Environment/sand.png`;
