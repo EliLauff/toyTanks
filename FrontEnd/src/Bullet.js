@@ -136,15 +136,15 @@ class Bullet {
     gameDiv.append(explosion);
     this.bulletCenter.remove();
     let opacity = 100;
-    let speed = 1000/60
+    let speed = 1000 / 60;
     function fadeOut() {
       opacity--;
-      explosion.style.opacity = opacity/100;
+      explosion.style.opacity = opacity / 100;
       if (opacity > 0) {
-        setTimeout(fadeOut,speed)
+        setTimeout(fadeOut, speed);
       }
     }
-    fadeOut()
+    fadeOut();
   }
 
   static all() {

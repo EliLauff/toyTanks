@@ -262,7 +262,7 @@ if (LAYOUT_CONFIG === "verticalLayout") {
   centerFour.style.top = `${centerTop + centerHeight}px`;
   gameDiv.append(centerFour);
 
-  let leftDiv = document.getElementById("left");]
+  let leftDiv = document.getElementById("left");
   let leftWidth = 44;
   let leftLeft = leftDiv.getBoundingClientRect().left;
   let leftTop = leftDiv.getBoundingClientRect().top;
