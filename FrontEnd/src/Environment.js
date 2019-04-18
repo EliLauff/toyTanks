@@ -8,6 +8,7 @@ let barrierHeight = 0.55 * height;
 let barrierWidth = 0.2 * width;
 const PLAYABLE_HEIGHT = height - 52;
 const PLAYABLE_WIDTH = width - 44;
+let LAYOUT_CONFIG = "";
 
 const SOUTHWEST_CORNER = document.createElement("div");
 SOUTHWEST_CORNER.style.position = "absolute";
