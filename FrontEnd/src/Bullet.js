@@ -139,7 +139,6 @@ class Bullet {
     explosion.style.top = `${this.one.getBoundingClientRect().y - 44}px`;
 
     gameDiv.append(explosion);
-    console.log(explosion);
     this.bulletCenter.remove();
   }
 
