@@ -20,22 +20,20 @@ function sLayout() {
   topDiv.id = "topSideways";
   while (topObstacleWidth < barrierWidth) {
     const metalBarrelObstable = document.createElement("img");
-    metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png";
-    metalBarrelObstable.style.transform = "rotate(90deg)";
+    metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust_2.png";
     topDiv.append(metalBarrelObstable);
     gameDiv.append(topDiv);
-    topObstacleWidth += 200;
+    topObstacleWidth += 62;
   }
   let bottomDiv = document.createElement("div");
   bottomDiv.id = "bottomSideways";
   while (bottomObstacleWidth < barrierWidth) {
     bottomDiv.style.top = height * 0.2 + barrierHeight;
     const metalBarrelObstable = document.createElement("img");
-    metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png";
-    metalBarrelObstable.style.transform = "rotate(90deg)";
+    metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust_2.png";
     bottomDiv.append(metalBarrelObstable);
     gameDiv.append(bottomDiv);
-    bottomObstacleWidth += 200;
+    bottomObstacleWidth += 62;
   }
 }
 
