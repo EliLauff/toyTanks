@@ -1,6 +1,6 @@
 const ASSET_ROOT = "./assets";
-let livesDiv = document.querySelector("#lives")
-let menuDiv = document.querySelector('#menu_window')
+let livesDiv = document.querySelector("#lives");
+let menuDiv = document.querySelector("#menu_window");
 let gameDiv = document.querySelector("#game_window");
 let height = gameDiv.clientHeight;
 let width = gameDiv.clientWidth;
@@ -47,10 +47,30 @@ gameDiv.append(SOUTHEAST_CORNER);
 const SE_X = SOUTHEAST_CORNER.getBoundingClientRect().x;
 const SE_Y = SOUTHEAST_CORNER.getBoundingClientRect().y;
 
-const TOP_POINTS = [{ x: NW_X, y: NW_Y }, { x: NE_X, y: NE_Y }];
-const BOTTOM_POINTS = [{ x: SW_X, y: SW_Y }, { x: SE_X, y: SE_Y }];
-const LEFT_POINTS = [{ x: NW_X, y: NW_Y }, { x: SW_X, y: SW_Y }];
-const RIGHT_POINTS = [{ x: NE_X, y: NE_Y }, { x: SE_X, y: SE_Y }];
+const TOP_POINTS = [
+  { x: NW_X, y: NW_Y },
+  { x: NE_X, y: NE_Y },
+  { x: NW_X, y: NW_Y - 30 },
+  { x: NE_X, y: NE_Y - 30 }
+];
+const BOTTOM_POINTS = [
+  { x: SW_X, y: SW_Y },
+  { x: SE_X, y: SE_Y },
+  { x: SW_X, y: SW_Y + 30 },
+  { x: SE_X, y: SE_Y + 30 }
+];
+const LEFT_POINTS = [
+  { x: NW_X, y: NW_Y },
+  { x: SW_X, y: SW_Y },
+  { x: NW_X - 30, y: NW_Y },
+  { x: SW_X - 30, y: SW_Y }
+];
+const RIGHT_POINTS = [
+  { x: NE_X, y: NE_Y },
+  { x: SE_X, y: SE_Y },
+  { x: NE_X + 30, y: NE_Y },
+  { x: SE_X + 30, y: SE_Y }
+];
 
 function background() {
   let imgSrc = `${ASSET_ROOT}/Environment/sand.png`;

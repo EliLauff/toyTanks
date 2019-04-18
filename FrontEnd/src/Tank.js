@@ -3,17 +3,17 @@ class Tank {
     this.color = color.charAt(0).toUpperCase() + color.slice(1);
     this.player = player;
     this.lives = 3;
-    this.stockpile = 3;
+    this.stockpile = 5;
     this.shootLocked = false;
 
     this.tankDiv = document.createElement("div");
     this.tankDiv.style.position = "absolute";
     if (this.player === 1) {
-      this.direction = 0;
+      this.direction = 45;
       this.tankDiv.style.left = "150px";
       this.tankDiv.style.bottom = "150px";
     } else {
-      this.direction = -180;
+      this.direction = 225;
       this.tankDiv.style.left = `${width - 250}px`;
       this.tankDiv.style.bottom = `${height - 250}px`;
     }
@@ -98,6 +98,35 @@ class Tank {
     this.tankDiv.style.bottom = `${bottomPos + y_comp}px`;
   }
 
+  checkMovement(speed, points_to_check) {
+    let x_comp = speed * Math.sin(this.direction * 0.0174533);
+    let y_comp = speed * Math.cos(this.direction * 0.0174533);
+    this.updatePoints();
+    let newPoints = [
+      {
+        x: parseFloat(this.one.getBoundingClientRect().x + x_comp),
+        y: parseFloat(this.one.getBoundingClientRect().y - y_comp)
+      },
+      {
+        x: parseFloat(this.two.getBoundingClientRect().x + x_comp),
+        y: parseFloat(this.two.getBoundingClientRect().y - y_comp)
+      },
+      {
+        x: parseFloat(this.three.getBoundingClientRect().x + x_comp),
+        y: parseFloat(this.three.getBoundingClientRect().y - y_comp)
+      },
+      {
+        x: parseFloat(this.four.getBoundingClientRect().x + x_comp),
+        y: parseFloat(this.four.getBoundingClientRect().y - y_comp)
+      }
+    ];
+    return doPolygonsIntersect(points_to_check, newPoints);
+  }
+
+  checkRotation(rotSpeed, points_to_check) {
+    newDirection = this.direction + rotSpeed;
+  }
+
   rotate(rotSpeed) {
     this.direction = this.direction + rotSpeed;
   }
@@ -107,7 +136,7 @@ class Tank {
       this.shootLocked = true;
       setTimeout(() => {
         this.shootLocked = false;
-      }, 500);
+      }, 150);
       this.fire();
     }
   }
@@ -148,9 +177,6 @@ class Tank {
       fadeOut();
 
       this.stockpile -= 1;
-      setTimeout(() => {
-        this.stockpile += 1;
-      }, 1000);
     }
   }
 
@@ -197,11 +223,11 @@ class Tank {
 
   respawn() {
     if (this.player === 1) {
-      this.direction = 0;
+      this.direction = 45;
       this.tankDiv.style.left = "150px";
       this.tankDiv.style.bottom = "150px";
     } else if (this.player === 2) {
-      this.direction = -180;
+      this.direction = 225;
       this.tankDiv.style.left = `${width - 250}px`;
       this.tankDiv.style.bottom = `${height - 250}px`;
     }
