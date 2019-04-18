@@ -117,12 +117,24 @@ class Tank {
     explosion.src = `${ASSET_ROOT}/Smoke/smokeGrey4.png`;
     explosion.style.position = "absolute";
     explosion.style.width = "40px";
+    explosion.style.opacity = 1;
     explosion.style.left = `${this.barrelCenter.getBoundingClientRect().x -
       20}px`;
     explosion.style.top = `${this.barrelCenter.getBoundingClientRect().y -
       20}px`;
-
+    
+    
     gameDiv.append(explosion);
+    let opacity = 100;
+    let speed = 1000/60
+    function fadeOut() {
+      opacity--;
+      explosion.style.opacity = opacity/100;
+      if (opacity > 0) {
+        setTimeout(fadeOut,speed)
+      }
+    }
+    fadeOut()
   }
 
   updatePoints() {
