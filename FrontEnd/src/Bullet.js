@@ -7,6 +7,7 @@ class Bullet {
     this.impactCounter = 0;
 
     this.bulletCenter = document.createElement("div");
+    this.bulletCenter.className = "bullet";
     this.bulletCenter.style.position = "absolute";
     this.bulletCenter.style.width = "5px";
     this.bulletCenter.style.transform = `rotate(${this.direction}deg)`;
@@ -22,7 +23,7 @@ class Bullet {
       this.color
     }Silver_outline.png`;
     this.bulletImg.style.position = "absolute";
-    this.bulletImg.style.top = "-35px";
+    this.bulletImg.style.top = "-40px";
     this.bulletImg.style.left = "-10px";
 
     document.body.append(this.bulletCenter);
@@ -32,28 +33,28 @@ class Bullet {
     this.one.style.position = "absolute";
     this.one.style.width = "0px";
     this.one.style.left = "-10px";
-    this.one.style.bottom = "0px";
+    this.one.style.bottom = "6px";
     this.bulletCenter.append(this.one);
 
     this.two = document.createElement("div");
     this.two.style.position = "absolute";
     this.two.style.width = "0px";
     this.two.style.left = "-10px";
-    this.two.style.bottom = "34px";
+    this.two.style.bottom = "40px";
     this.bulletCenter.append(this.two);
 
     this.three = document.createElement("div");
     this.three.style.position = "absolute";
     this.three.style.width = "0px";
     this.three.style.left = "10px";
-    this.three.style.bottom = "34px";
+    this.three.style.bottom = "40px";
     this.bulletCenter.append(this.three);
 
     this.four = document.createElement("div");
     this.four.style.position = "absolute";
     this.four.style.width = "0px";
     this.four.style.left = "10px";
-    this.four.style.bottom = "0px";
+    this.four.style.bottom = "6px";
     this.bulletCenter.append(this.four);
 
     this.points = [
@@ -83,9 +84,6 @@ class Bullet {
     } else {
       let absAngle = this.direction % 360;
       let partialAngle = 180 - 2 * absAngle;
-      console.log(this.direction);
-      console.log(partialAngle);
-      console.log(absAngle);
       this.direction = absAngle + partialAngle + 180;
       this.bulletCenter.style.transform = `rotate(${this.direction}deg)`;
 
@@ -99,9 +97,6 @@ class Bullet {
     } else {
       let absAngle = this.direction % 360;
       let partialAngle = 180 - 2 * absAngle;
-      console.log(this.direction);
-      console.log(partialAngle);
-      console.log(absAngle);
       this.direction = absAngle + partialAngle;
       this.bulletCenter.style.transform = `rotate(${this.direction}deg)`;
 

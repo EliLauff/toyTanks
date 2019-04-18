@@ -1,13 +1,10 @@
 tank1 = new Tank("red", 1);
 tank2 = new Tank("blue", 2);
 
-
-document.addEventListener("DOMContentLoaded", function(){
-  tank1.setLives()
-  tank2.setLives()
-})
-
-
+document.addEventListener("DOMContentLoaded", function() {
+  tank1.setLives();
+  tank2.setLives();
+});
 
 //create movement interval variables and set them to null
 let arrRightInt = null;
@@ -73,10 +70,10 @@ document.addEventListener("keydown", function(e) {
   }
 
   if (e.key == "Shift") {
-    tank2.fire();
+    tank2.shoot();
   }
   if (e.key == "e" || e.key == "E") {
-    tank1.fire();
+    tank1.shoot();
   }
 });
 
@@ -153,6 +150,17 @@ setInterval(function() {
   if (doPolygonsIntersect(RIGHT_POINTS, tank2.points)) {
     remedyTank2MovementStatic(RIGHT_POINTS);
   }
+
+  Bullet.all().forEach(bullet => {
+    bullet.updatePoints();
+    if (doPolygonsIntersect(tank1.points, bullet.points)) {
+      tank1.loseLife();
+    }
+    if (doPolygonsIntersect(tank2.points, bullet.points)) {
+      tank2.loseLife();
+    }
+  });
+
   if (LAYOUT_CONFIG === "verticalLayout") {
     let centerOne = document.getElementById("center-one");
     let centerTwo = document.getElementById("center-two");
