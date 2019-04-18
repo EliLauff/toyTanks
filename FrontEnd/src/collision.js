@@ -59,10 +59,10 @@ function doPolygonsIntersect(a, b) {
   return true;
 }
 
-function remedyMovement() {
+function remedyTank2Movement() {
   if (arrRightInt !== null) {
     let leftInt = setInterval(function() {
-      let rotSpeed = -2;
+      let rotSpeed = -3;
       tank2.rotate(rotSpeed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -77,7 +77,7 @@ function remedyMovement() {
   }
   if (arrLeftInt !== null) {
     let rightInt = setInterval(function() {
-      let rotSpeed = 2;
+      let rotSpeed = 3;
       tank2.rotate(rotSpeed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -90,39 +90,10 @@ function remedyMovement() {
       }
     }, 20);
   }
-  if (dInt !== null) {
-    let leftInt = setInterval(function() {
-      let rotSpeed = -2;
-      tank1.rotate(rotSpeed);
-      tank1.updatePoints();
-      tank2.updatePoints();
-      if (
-        doPolygonsIntersect(tank1.points, tank2.points) === false ||
-        dInt === null
-      ) {
-        clearInterval(leftInt);
-        leftInt = null;
-      }
-    }, 20);
-  }
-  if (aInt !== null) {
-    let rightInt = setInterval(function() {
-      let rotSpeed = 2;
-      tank1.rotate(rotSpeed);
-      tank1.updatePoints();
-      tank2.updatePoints();
-      if (
-        doPolygonsIntersect(tank1.points, tank2.points) === false ||
-        aInt === null
-      ) {
-        clearInterval(rightInt);
-        rightInt = null;
-      }
-    }, 20);
-  }
+
   if (arrDownInt !== null) {
     let upInt = setInterval(function() {
-      let speed = 8;
+      let speed = 3;
       tank2.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -137,7 +108,7 @@ function remedyMovement() {
   }
   if (arrUpInt !== null) {
     let downInt = setInterval(function() {
-      let speed = -8;
+      let speed = -3;
       tank2.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -150,9 +121,43 @@ function remedyMovement() {
       }
     }, 20);
   }
+}
+
+function remedyTank1Movement() {
+  if (dInt !== null) {
+    let leftInt = setInterval(function() {
+      let rotSpeed = -3;
+      tank1.rotate(rotSpeed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(tank1.points, tank2.points) === false ||
+        dInt === null
+      ) {
+        clearInterval(leftInt);
+        leftInt = null;
+      }
+    }, 20);
+  }
+  if (aInt !== null) {
+    let rightInt = setInterval(function() {
+      let rotSpeed = 3;
+      tank1.rotate(rotSpeed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(tank1.points, tank2.points) === false ||
+        aInt === null
+      ) {
+        clearInterval(rightInt);
+        rightInt = null;
+      }
+    }, 20);
+  }
+
   if (sInt !== null) {
     let upInt = setInterval(function() {
-      let speed = 8;
+      let speed = 3;
       tank1.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
@@ -167,12 +172,140 @@ function remedyMovement() {
   }
   if (wInt !== null) {
     let downInt = setInterval(function() {
-      let speed = -8;
+      let speed = -3;
       tank1.move(speed);
       tank1.updatePoints();
       tank2.updatePoints();
       if (
         doPolygonsIntersect(tank1.points, tank2.points) === false ||
+        wInt === null
+      ) {
+        clearInterval(downInt);
+        downInt = null;
+      }
+    }, 20);
+  }
+}
+
+function remedyTank2MovementStatic(staticPoints) {
+  if (arrRightInt !== null) {
+    let leftInt = setInterval(function() {
+      let rotSpeed = -3;
+      tank2.rotate(rotSpeed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(staticPoints, tank2.points) === false ||
+        arrRightInt === null
+      ) {
+        clearInterval(leftInt);
+        leftInt = null;
+      }
+    }, 20);
+  }
+  if (arrLeftInt !== null) {
+    let rightInt = setInterval(function() {
+      let rotSpeed = 3;
+      tank2.rotate(rotSpeed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(staticPoints, tank2.points) === false ||
+        arrLeftInt === null
+      ) {
+        clearInterval(rightInt);
+        rightInt = null;
+      }
+    }, 20);
+  }
+
+  if (arrDownInt !== null) {
+    let upInt = setInterval(function() {
+      let speed = 3;
+      tank2.move(speed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(staticPoints, tank2.points) === false ||
+        arrDownInt === null
+      ) {
+        clearInterval(upInt);
+        upInt = null;
+      }
+    }, 20);
+  }
+  if (arrUpInt !== null) {
+    let downInt = setInterval(function() {
+      let speed = -3;
+      tank2.move(speed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(staticPoints, tank2.points) === false ||
+        arrUpInt === null
+      ) {
+        clearInterval(downInt);
+        downInt = null;
+      }
+    }, 20);
+  }
+}
+
+function remedyTank1MovementStatic(staticPoints) {
+  if (dInt !== null) {
+    let leftInt = setInterval(function() {
+      let rotSpeed = -3;
+      tank1.rotate(rotSpeed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(tank1.points, staticPoints) === false ||
+        dInt === null
+      ) {
+        clearInterval(leftInt);
+        leftInt = null;
+      }
+    }, 20);
+  }
+  if (aInt !== null) {
+    let rightInt = setInterval(function() {
+      let rotSpeed = 3;
+      tank1.rotate(rotSpeed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(tank1.points, staticPoints) === false ||
+        aInt === null
+      ) {
+        clearInterval(rightInt);
+        rightInt = null;
+      }
+    }, 20);
+  }
+
+  if (sInt !== null) {
+    let upInt = setInterval(function() {
+      let speed = 3;
+      tank1.move(speed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(tank1.points, staticPoints) === false ||
+        sInt === null
+      ) {
+        clearInterval(upInt);
+        upInt = null;
+      }
+    }, 20);
+  }
+  if (wInt !== null) {
+    let downInt = setInterval(function() {
+      let speed = -3;
+      tank1.move(speed);
+      tank1.updatePoints();
+      tank2.updatePoints();
+      if (
+        doPolygonsIntersect(tank1.points, staticPoints) === false ||
         wInt === null
       ) {
         clearInterval(downInt);
