@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+Player.destroy_all
+Match.destroy_all
+
+player1 = Player.create(name: "Red", wins: 1, losses: 2)
+player2 = Player.create(name: "Blue", wins: 2, losses: 1)
+
+Match.create(duration: 30, player: player1)
