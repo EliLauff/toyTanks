@@ -1,11 +1,6 @@
 const ASSET_ROOT = "./assets";
 
 let gameDiv = document.querySelector("#game_window");
-let verticalObstacleDiv = document.querySelector("#center");
-let leftDiv = document.querySelector("#left");
-let rightDiv = document.querySelector("#right");
-let horozontalObstacleDiv = document.querySelector("#topSideways");
-let bottomHorozontalObstacleDiv = document.querySelector("#bottomSideways");
 let height = gameDiv.clientHeight;
 let width = gameDiv.clientWidth;
 // let barrierHeight = height - 434;
