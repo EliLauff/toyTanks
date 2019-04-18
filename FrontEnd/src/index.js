@@ -1,6 +1,14 @@
 tank1 = new Tank("red", 1);
 tank2 = new Tank("blue", 2);
 
+
+document.addEventListener("DOMContentLoaded", function(){
+  tank1.setLives()
+  tank2.setLives()
+})
+
+
+
 //create movement interval variables and set them to null
 let arrRightInt = null;
 let arrLeftInt = null;

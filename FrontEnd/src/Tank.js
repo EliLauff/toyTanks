@@ -134,6 +134,127 @@ class Tank {
       }
     ];
   }
+  // if (tank1 hit){
+  //   tank1.loseLife()
+  // }
+  // if (tank2 hit){
+  //   tank2.loseLife()
+  // }
+  // tank1.respawn()
+  // tank2.respawn()
+
+  // tank1.loseLife()
+  // tank1.loseLife()
+  // tank1.loseLife()
+
+  setLives() {
+    let lives = document.createElement("p")
+    lives.id = `${this.player}`
+    lives.innerText = `${this.color} lives - ${this.lives}`
+
+    livesDiv.append(lives)
+  }
+  
+  
+  respawn() {
+    if (this.player === 1) {
+      this.direction = 0;
+      this.tankDiv.style.left = "150px";
+      this.tankDiv.style.bottom = "150px";
+    } else if (this.player === 2) {
+      this.direction = -180;
+      this.tankDiv.style.left = `${width - 250}px`;
+      this.tankDiv.style.bottom = `${height - 250}px`;
+    }
+  }
+
+  loseLife() {
+    this.lives -= 1;
+    if(this.lives === 0){
+      livesDiv.innerHTML = "",
+      tank1.setLives(),
+      tank2.setLives(),
+        setTimeout( () =>
+          this.loseGame()
+      )
+    }
+      
+    else if(this.player === 1){
+      window.alert("Blue player has won this round.")
+      tank1.respawn()
+      tank2.respawn()
+      livesDiv.innerHTML = ""
+      tank1.setLives()
+      tank2.setLives()
+    } 
+    else if(this.player === 2){
+      window.alert("Red player has won this round.")
+      tank1.respawn()
+      tank2.respawn()
+      livesDiv.innerHTML = ""
+      tank1.setLives()
+      tank2.setLives()
+    }
+  }
+
+  loseGame() {
+    if(this.player === 1 ) {
+      setTimeout( () =>
+        window.alert("Blue player has won!!")
+      )
+    }
+    if(this.player === 2 ) {
+      setTimeout( () =>
+        window.alert("Red player has won!!")
+      )
+    }
+    //render welcome page
+  }
+  
+ 
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //   fire() {
   //     bottomPos = parseInt(this.style.bottom);asa

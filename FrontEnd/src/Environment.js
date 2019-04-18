@@ -1,5 +1,6 @@
 const ASSET_ROOT = "./assets";
-
+let livesDiv = document.querySelector("#lives")
+let menuDiv = document.querySelector('#menu_window')
 let gameDiv = document.querySelector("#game_window");
 let height = gameDiv.clientHeight;
 let width = gameDiv.clientWidth;
