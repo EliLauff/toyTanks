@@ -93,7 +93,6 @@ function background() {
     ticker += 128;
   }
 }
-background();
 
 function border() {
   let y = 0;
@@ -138,4 +137,3 @@ function border() {
     i++;
   }
 }
-border();

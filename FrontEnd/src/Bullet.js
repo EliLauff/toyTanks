@@ -130,8 +130,9 @@ class Bullet {
     let explosion = document.createElement("img");
     explosion.src = `${ASSET_ROOT}/Smoke/smokeGrey0.png`;
     explosion.style.position = "absolute";
-    explosion.style.left = `${this.one.getBoundingClientRect().x - 44}px`;
-    explosion.style.top = `${this.one.getBoundingClientRect().y - 44}px`;
+    explosion.style.width = "60px";
+    explosion.style.left = `${this.one.getBoundingClientRect().x - 30}px`;
+    explosion.style.top = `${this.one.getBoundingClientRect().y - 30}px`;
 
     gameDiv.append(explosion);
     this.bulletCenter.remove();
@@ -145,6 +146,11 @@ class Bullet {
       }
     }
     fadeOut();
+
+    let index = allBullets.indexOf(this);
+    if (index > -1) {
+      allBullets.splice(index, 1);
+    }
   }
 
   static all() {
