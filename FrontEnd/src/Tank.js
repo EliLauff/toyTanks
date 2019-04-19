@@ -3,7 +3,7 @@ class Tank {
     this.color = color.charAt(0).toUpperCase() + color.slice(1);
     this.player = player;
     this.lives = 3;
-    this.stockpile = 5;
+    this.stockpile = 3;
     this.shootLocked = false;
 
     this.tankDiv = document.createElement("div");

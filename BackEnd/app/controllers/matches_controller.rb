@@ -6,7 +6,7 @@ class MatchesController < ApplicationController
 
     def create
         match = Match.create(match_params)
-        render json: match
+        # render json: match
     end
 
     def show 
@@ -14,7 +14,7 @@ class MatchesController < ApplicationController
     end
 
     def match_params
-        params.permit(:player1_id, :player2_id)
+        params.permit(player1_id: Player.find_by(name: :player_one_name).id, player2_id: Player.find_by(name: :player_two_name).id)
     end
 
 end

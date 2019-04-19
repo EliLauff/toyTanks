@@ -15,8 +15,8 @@ class PlayersController < ApplicationController
     end
 
     def create
-        player = Player.create(player_params)
-        render json: match
+        player = Player.find_or_create_by(player_params)
+        # render json: match
     end
 
     def show 

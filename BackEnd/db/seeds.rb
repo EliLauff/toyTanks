@@ -12,5 +12,6 @@ Match.destroy_all
 
 player1 = Player.create(name: "Red", wins: 1, losses: 2)
 player2 = Player.create(name: "Blue", wins: 2, losses: 1)
+player3 = Player.create(name: "Green")
 
 Match.create(player1_id: player1.id, player2_id: player2.id)
