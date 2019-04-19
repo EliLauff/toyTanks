@@ -1,4 +1,216 @@
 const renderGame = function() {
+  const ASSET_ROOT = "./assets";
+  let menuDiv = document.querySelector("#menu_window");
+  let gameDiv = document.querySelector("#game_window");
+  let height = gameDiv.clientHeight;
+  let width = gameDiv.clientWidth;
+  // let barrierHeight = height - 434;
+  let barrierHeight = 0.55 * height;
+  let barrierWidth = 0.2 * width;
+  const PLAYABLE_HEIGHT = height - 52;
+  const PLAYABLE_WIDTH = width - 44;
+  let LAYOUT_CONFIG = "";
+
+  const SOUTHWEST_CORNER = document.createElement("div");
+  SOUTHWEST_CORNER.style.position = "absolute";
+  SOUTHWEST_CORNER.style.width = "0px";
+  SOUTHWEST_CORNER.style.left = "44px";
+  SOUTHWEST_CORNER.style.top = `${PLAYABLE_HEIGHT}px`;
+  gameDiv.append(SOUTHWEST_CORNER);
+  const SW_X = SOUTHWEST_CORNER.getBoundingClientRect().x;
+  const SW_Y = SOUTHWEST_CORNER.getBoundingClientRect().y;
+
+  const NORTHWEST_CORNER = document.createElement("div");
+  NORTHWEST_CORNER.style.position = "absolute";
+  NORTHWEST_CORNER.style.width = "0px";
+  NORTHWEST_CORNER.style.left = "44px";
+  NORTHWEST_CORNER.style.top = `52px`;
+  gameDiv.append(NORTHWEST_CORNER);
+  const NW_X = NORTHWEST_CORNER.getBoundingClientRect().x;
+  const NW_Y = NORTHWEST_CORNER.getBoundingClientRect().y;
+
+  const NORTHEAST_CORNER = document.createElement("div");
+  NORTHEAST_CORNER.style.position = "absolute";
+  NORTHEAST_CORNER.style.width = "0px";
+  NORTHEAST_CORNER.style.left = `${PLAYABLE_WIDTH}px`;
+  NORTHEAST_CORNER.style.top = `52px`;
+  gameDiv.append(NORTHEAST_CORNER);
+  const NE_X = NORTHEAST_CORNER.getBoundingClientRect().x;
+  const NE_Y = NORTHEAST_CORNER.getBoundingClientRect().y;
+
+  const SOUTHEAST_CORNER = document.createElement("div");
+  SOUTHEAST_CORNER.style.position = "absolute";
+  SOUTHEAST_CORNER.style.width = "0px";
+  SOUTHEAST_CORNER.style.left = `${PLAYABLE_WIDTH}px`;
+  SOUTHEAST_CORNER.style.top = `${PLAYABLE_HEIGHT}`;
+  gameDiv.append(SOUTHEAST_CORNER);
+  const SE_X = SOUTHEAST_CORNER.getBoundingClientRect().x;
+  const SE_Y = SOUTHEAST_CORNER.getBoundingClientRect().y;
+
+  const TOP_POINTS = [
+    { x: NW_X, y: NW_Y },
+    { x: NE_X, y: NE_Y },
+    { x: NW_X, y: NW_Y - 30 },
+    { x: NE_X, y: NE_Y - 30 }
+  ];
+  const BOTTOM_POINTS = [
+    { x: SW_X, y: SW_Y },
+    { x: SE_X, y: SE_Y },
+    { x: SW_X, y: SW_Y + 30 },
+    { x: SE_X, y: SE_Y + 30 }
+  ];
+  const LEFT_POINTS = [
+    { x: NW_X, y: NW_Y },
+    { x: SW_X, y: SW_Y },
+    { x: NW_X - 30, y: NW_Y },
+    { x: SW_X - 30, y: SW_Y }
+  ];
+  const RIGHT_POINTS = [
+    { x: NE_X, y: NE_Y },
+    { x: SE_X, y: SE_Y },
+    { x: NE_X + 30, y: NE_Y },
+    { x: SE_X + 30, y: SE_Y }
+  ];
+
+  function background() {
+    let imgSrc = `${ASSET_ROOT}/Environment/sand.png`;
+    let counter = 0;
+    let ticker = 0;
+    while (ticker <= height + 128) {
+      let backImg = document.createElement("img");
+      backImg.src = imgSrc;
+      gameDiv.prepend(backImg);
+      while (counter <= width + 128) {
+        let backImg = document.createElement("img");
+        backImg.style.position = "absolute";
+        backImg.style.top = `${ticker}px`;
+        backImg.style.left = `${counter}px`;
+        backImg.src = imgSrc;
+        gameDiv.prepend(backImg);
+        counter += 128;
+      }
+      counter = 0;
+      ticker += 128;
+    }
+  }
+
+  function border() {
+    let y = 0;
+    let borderHeight = 0;
+    while (borderHeight <= height) {
+      const metalBarrelLeft = document.createElement("img");
+      metalBarrelLeft.style.position = "absolute";
+      metalBarrelLeft.style.left = `0px`;
+      metalBarrelLeft.style.bottom = `${44 + y * 66}`;
+      borderHeight = parseInt(metalBarrelLeft.style.bottom) + 66;
+      metalBarrelLeft.src = `./assets/Obstacles/barrelGrey_side.png`;
+      document.body.append(metalBarrelLeft);
+
+      const metalBarrelRight = document.createElement("img");
+      metalBarrelRight.style.position = "absolute";
+      metalBarrelRight.style.right = "0px";
+      metalBarrelRight.style.bottom = `${44 + y * 66}`;
+      metalBarrelRight.src = `./assets/Obstacles/barrelGrey_side.png`;
+      gameDiv.append(metalBarrelRight);
+      y++;
+    }
+
+    let i = 0;
+    let borderWidth = 0;
+    while (borderWidth <= width) {
+      const metalBarrelTop = document.createElement("img");
+      metalBarrelTop.style.transform = "rotate(90deg)";
+      metalBarrelTop.style.position = "absolute";
+      metalBarrelTop.style.left = `${0 + i * 66}px`;
+      borderWidth = parseInt(metalBarrelTop.style.left) + 66;
+      metalBarrelTop.style.top = "0px";
+      metalBarrelTop.src = `./assets/Obstacles/barrelGrey_side.png`;
+      document.body.append(metalBarrelTop);
+
+      const metalBarrelBottom = document.createElement("img");
+      metalBarrelBottom.style.transform = "rotate(90deg)";
+      metalBarrelBottom.style.position = "absolute";
+      metalBarrelBottom.style.left = `${0 + i * 66}px`;
+      metalBarrelBottom.style.bottom = `0px`;
+      metalBarrelBottom.src = `./assets/Obstacles/barrelGrey_side.png`;
+      gameDiv.append(metalBarrelBottom);
+      i++;
+    }
+  }
+
+  function verticalLayout() {
+    let centerHeight = 0;
+    let centerDiv = document.createElement("div");
+    centerDiv.id = "center";
+    while (centerHeight < barrierHeight) {
+      const metalBarrelObstable = document.createElement("img");
+      centerDiv.id = "center";
+      metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png";
+      centerDiv.append(metalBarrelObstable);
+      gameDiv.append(centerDiv);
+      centerHeight += 62;
+    }
+    LAYOUT_CONFIG = "verticalLayout";
+  }
+
+  function sLayout() {
+    let topObstacleWidth = 0;
+    let bottomObstacleWidth = 0;
+    verticalLayout();
+    let topDiv = document.createElement("div");
+    topDiv.id = "topSideways";
+    while (topObstacleWidth < barrierWidth) {
+      const metalBarrelObstable = document.createElement("img");
+      metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust_2.png";
+      topDiv.append(metalBarrelObstable);
+      gameDiv.append(topDiv);
+      topObstacleWidth += 62;
+    }
+    let bottomDiv = document.createElement("div");
+    bottomDiv.id = "bottomSideways";
+    while (bottomObstacleWidth < barrierWidth) {
+      const metalBarrelObstable = document.createElement("img");
+      metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust_2.png";
+      bottomDiv.append(metalBarrelObstable);
+      gameDiv.append(bottomDiv);
+      bottomObstacleWidth += 62;
+    }
+    LAYOUT_CONFIG = "sLayout";
+  }
+
+  function chaos() {
+    verticalLayout();
+    let leftDiv = document.createElement("div");
+    leftDiv.id = "left";
+    let leftHeight = 0;
+    while (leftHeight < barrierHeight) {
+      const metalBarrelObstable = document.createElement("img");
+      metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png";
+      leftDiv.append(metalBarrelObstable);
+      gameDiv.append(leftDiv);
+      leftHeight += 62;
+    }
+    let rightDiv = document.createElement("div");
+    rightDiv.id = "right";
+    let rightHeight = 0;
+    while (rightHeight < barrierHeight) {
+      const metalBarrelObstable = document.createElement("img");
+      metalBarrelObstable.src = "./assets/Obstacles/barrelGrey_sde_rust.png";
+      rightDiv.append(metalBarrelObstable);
+      gameDiv.append(rightDiv);
+      rightHeight += 62;
+    }
+    LAYOUT_CONFIG = "chaos";
+  }
+
+  functionArray = [verticalLayout, sLayout, chaos];
+
+  function randomMap() {
+    let randMap =
+      functionArray[Math.floor(Math.random() * functionArray.length)];
+    randMap();
+  }
+
   background();
   border();
   randomMap();
@@ -271,13 +483,464 @@ const renderGame = function() {
     gameDiv.append(rightFour);
   }
 
+  class Tank {
+    constructor(color, player) {
+      this.color = color.charAt(0).toUpperCase() + color.slice(1);
+      this.player = player;
+      this.lives = 3;
+      this.stockpile = 3;
+      this.shootLocked = false;
+
+      this.tankDiv = document.createElement("div");
+      this.tankDiv.style.position = "absolute";
+      if (this.player === 1) {
+        this.direction = 45;
+        this.tankDiv.style.left = "150px";
+        this.tankDiv.style.bottom = "150px";
+      } else {
+        this.direction = 225;
+        this.tankDiv.style.left = `${width - 250}px`;
+        this.tankDiv.style.bottom = `${height - 250}px`;
+      }
+
+      this.livesDiv = document.createElement("div");
+      this.livesDiv.id = `${this.player}-lives`;
+      menuDiv.append(this.livesDiv);
+
+      this.speed = 0;
+
+      this.tankImg = document.createElement("img");
+      this.tankImg.src = `${ASSET_ROOT}/Tanks/tank${this.color}_outline.png`;
+
+      this.tankBarrel = document.createElement("img");
+      this.tankBarrel.src = `${ASSET_ROOT}/Tanks/barrelBlack_outline.png`;
+      this.tankBarrel.style.position = "absolute";
+      this.tankBarrel.style.left = "65px";
+      this.tankBarrel.style.top = "34px";
+      this.tankBarrel.style.transform = "rotate(90deg)";
+
+      gameDiv.append(this.tankDiv);
+      this.tankDiv.append(this.tankImg);
+      this.tankDiv.append(this.tankBarrel);
+      this.tankDiv.style.transform = `rotate(${this.direction}deg)`;
+
+      this.barrelCenter = document.createElement("div");
+      this.barrelCenter.style.position = "absolute";
+      this.barrelCenter.style.width = "0px";
+      this.barrelCenter.style.left = "80px";
+      this.barrelCenter.style.top = "39px";
+      this.tankDiv.append(this.barrelCenter);
+
+      this.one = document.createElement("div");
+      this.one.style.position = "absolute";
+      this.one.style.width = "0px";
+      this.one.style.left = "0px";
+      this.one.style.top = "0px";
+      this.tankDiv.append(this.one);
+
+      this.two = document.createElement("div");
+      this.two.style.position = "absolute";
+      this.two.style.width = "0px";
+      this.two.style.left = "76px";
+      this.two.style.top = "0px";
+      this.tankDiv.append(this.two);
+
+      this.three = document.createElement("div");
+      this.three.style.position = "absolute";
+      this.three.style.width = "0px";
+      this.three.style.left = "76px";
+      this.three.style.top = "76px";
+      this.tankDiv.append(this.three);
+
+      this.four = document.createElement("div");
+      this.four.style.position = "absolute";
+      this.four.style.width = "0px";
+      this.four.style.left = "0px";
+      this.four.style.top = "76px";
+      this.tankDiv.append(this.four);
+
+      this.points = [
+        {
+          x: this.one.getBoundingClientRect().x,
+          y: this.one.getBoundingClientRect().y
+        },
+        {
+          x: this.two.getBoundingClientRect().x,
+          y: this.two.getBoundingClientRect().y
+        },
+        {
+          x: this.three.getBoundingClientRect().x,
+          y: this.three.getBoundingClientRect().y
+        },
+        {
+          x: this.four.getBoundingClientRect().x,
+          y: this.four.getBoundingClientRect().y
+        }
+      ];
+    }
+
+    move(speed) {
+      let x_comp = speed * Math.sin(this.direction * 0.0174533);
+      let y_comp = speed * Math.cos(this.direction * 0.0174533);
+      let leftPos = parseFloat(this.tankDiv.style.left);
+      let bottomPos = parseFloat(this.tankDiv.style.bottom);
+      this.tankDiv.style.left = `${leftPos + x_comp}px`;
+      this.tankDiv.style.bottom = `${bottomPos + y_comp}px`;
+    }
+
+    checkMovement(speed, points_to_check) {
+      let x_comp = speed * Math.sin(this.direction * 0.0174533);
+      let y_comp = speed * Math.cos(this.direction * 0.0174533);
+      this.updatePoints();
+      let newPoints = [
+        {
+          x: parseFloat(this.one.getBoundingClientRect().x + x_comp),
+          y: parseFloat(this.one.getBoundingClientRect().y - y_comp)
+        },
+        {
+          x: parseFloat(this.two.getBoundingClientRect().x + x_comp),
+          y: parseFloat(this.two.getBoundingClientRect().y - y_comp)
+        },
+        {
+          x: parseFloat(this.three.getBoundingClientRect().x + x_comp),
+          y: parseFloat(this.three.getBoundingClientRect().y - y_comp)
+        },
+        {
+          x: parseFloat(this.four.getBoundingClientRect().x + x_comp),
+          y: parseFloat(this.four.getBoundingClientRect().y - y_comp)
+        }
+      ];
+      return doPolygonsIntersect(points_to_check, newPoints);
+    }
+
+    checkRotation(rotSpeed, points_to_check) {
+      newDirection = this.direction + rotSpeed;
+    }
+
+    rotate(rotSpeed) {
+      this.direction = this.direction + rotSpeed;
+    }
+
+    shoot() {
+      if (this.shootLocked === false) {
+        this.shootLocked = true;
+        setTimeout(() => {
+          this.shootLocked = false;
+        }, 333);
+        this.fire();
+      }
+    }
+
+    fire() {
+      if (this.stockpile > 0) {
+        let newBullet = new Bullet(this.color, this);
+
+        let bulletInt = setInterval(function() {
+          let x_comp = 8 * Math.sin(newBullet.direction * 0.0174533);
+          let y_comp = 8 * Math.cos(newBullet.direction * 0.0174533);
+          let leftPos = parseFloat(newBullet.bulletCenter.style.left);
+          let topPos = parseFloat(newBullet.bulletCenter.style.top);
+          newBullet.bulletCenter.style.left = `${leftPos + x_comp}px`;
+          newBullet.bulletCenter.style.top = `${topPos - y_comp}px`;
+        }, 20);
+
+        let explosion = document.createElement("img");
+        explosion.src = `${ASSET_ROOT}/Smoke/smokeGrey4.png`;
+        explosion.style.position = "absolute";
+        explosion.style.width = "40px";
+        explosion.style.opacity = 1;
+        explosion.style.left = `${this.barrelCenter.getBoundingClientRect().x -
+          20}px`;
+        explosion.style.top = `${this.barrelCenter.getBoundingClientRect().y -
+          20}px`;
+
+        gameDiv.append(explosion);
+        let opacity = 100;
+        let speed = 1000 / 60;
+        function fadeOut() {
+          opacity--;
+          explosion.style.opacity = opacity / 100;
+          if (opacity > 0) {
+            setTimeout(fadeOut, speed);
+          }
+        }
+        fadeOut();
+
+        this.stockpile -= 1;
+      }
+    }
+
+    updatePoints() {
+      this.points = [
+        {
+          x: this.one.getBoundingClientRect().x,
+          y: this.one.getBoundingClientRect().y
+        },
+        {
+          x: this.two.getBoundingClientRect().x,
+          y: this.two.getBoundingClientRect().y
+        },
+        {
+          x: this.three.getBoundingClientRect().x,
+          y: this.three.getBoundingClientRect().y
+        },
+        {
+          x: this.four.getBoundingClientRect().x,
+          y: this.four.getBoundingClientRect().y
+        }
+      ];
+    }
+    // if (tank1 hit){
+    //   tank1.loseLife()
+    // }
+    // if (tank2 hit){
+    //   tank2.loseLife()
+    // }
+    // tank1.respawn()
+    // tank2.respawn()
+
+    // tank1.loseLife()
+    // tank1.loseLife()
+    // tank1.loseLife()
+
+    setLives() {
+      this.livesDiv.innerHTML = "";
+      this.livesDiv.innerText = `${this.color} lives - ${this.lives}`;
+    }
+
+    respawn() {
+      if (this.player === 1) {
+        this.direction = 45;
+        this.tankDiv.style.left = "150px";
+        this.tankDiv.style.bottom = "150px";
+      } else if (this.player === 2) {
+        this.direction = 225;
+        this.tankDiv.style.left = `${width - 250}px`;
+        this.tankDiv.style.bottom = `${height - 250}px`;
+      }
+    }
+
+    static clearIntervals() {
+      clearInterval(arrRightInt);
+      clearInterval(arrLeftInt);
+      clearInterval(aInt);
+      clearInterval(dInt);
+      clearInterval(arrUpInt);
+      clearInterval(arrDownInt);
+      clearInterval(wInt);
+      clearInterval(sInt);
+      arrRightInt = null;
+      arrLeftInt = null;
+      aInt = null;
+      dInt = null;
+      arrUpInt = null;
+      arrDownInt = null;
+      wInt = null;
+      sInt = null;
+    }
+
+    loseLife() {
+      this.lives -= 1;
+      Tank.clearIntervals();
+      if (this.lives === 0) {
+        tank1.setLives();
+        tank2.setLives();
+        setTimeout(() => this.loseGame());
+      } else if (this.player === 1) {
+        window.alert("Blue player has won this round.");
+        tank1.respawn();
+        tank2.respawn();
+        tank1.setLives();
+        tank2.setLives();
+      } else if (this.player === 2) {
+        window.alert("Red player has won this round.");
+        tank1.respawn();
+        tank2.respawn();
+        tank1.setLives();
+        tank2.setLives();
+      }
+      allBullets = [];
+      let bulletsToClear = document.querySelectorAll(".bullet");
+      bulletsToClear.forEach(bullet => {
+        bullet.remove();
+      });
+    }
+
+    loseGame() {
+      if (this.player === 1) {
+        setTimeout(() => window.alert("Blue player has won!!"));
+      }
+      if (this.player === 2) {
+        setTimeout(() => window.alert("Red player has won!!"));
+      }
+      //render welcome page
+    }
+  }
+
+  let allBullets = [];
+  class Bullet {
+    constructor(color, tank) {
+      this.color = color;
+      this.tank = tank;
+      this.direction = this.tank.direction;
+      this.impactCounter = 0;
+
+      this.bulletCenter = document.createElement("div");
+      this.bulletCenter.className = "bullet";
+      this.bulletCenter.style.position = "absolute";
+      this.bulletCenter.style.width = "5px";
+      this.bulletCenter.style.transform = `rotate(${this.direction}deg)`;
+
+      this.xPos = this.tank.barrelCenter.getBoundingClientRect().x;
+      this.yPos = this.tank.barrelCenter.getBoundingClientRect().y;
+
+      this.bulletCenter.style.left = `${this.xPos}px`;
+      this.bulletCenter.style.top = `${this.yPos}px`;
+
+      this.bulletImg = document.createElement("img");
+      this.bulletImg.src = `${ASSET_ROOT}/Bullets/bullet${
+        this.color
+      }Silver_outline.png`;
+      this.bulletImg.style.position = "absolute";
+      this.bulletImg.style.top = "-40px";
+      this.bulletImg.style.left = "-10px";
+
+      document.body.append(this.bulletCenter);
+      this.bulletCenter.append(this.bulletImg);
+
+      this.one = document.createElement("div");
+      this.one.style.position = "absolute";
+      this.one.style.width = "0px";
+      this.one.style.left = "-10px";
+      this.one.style.bottom = "6px";
+      this.bulletCenter.append(this.one);
+
+      this.two = document.createElement("div");
+      this.two.style.position = "absolute";
+      this.two.style.width = "0px";
+      this.two.style.left = "-10px";
+      this.two.style.bottom = "40px";
+      this.bulletCenter.append(this.two);
+
+      this.three = document.createElement("div");
+      this.three.style.position = "absolute";
+      this.three.style.width = "0px";
+      this.three.style.left = "10px";
+      this.three.style.bottom = "40px";
+      this.bulletCenter.append(this.three);
+
+      this.four = document.createElement("div");
+      this.four.style.position = "absolute";
+      this.four.style.width = "0px";
+      this.four.style.left = "10px";
+      this.four.style.bottom = "6px";
+      this.bulletCenter.append(this.four);
+
+      this.points = [
+        {
+          x: this.one.getBoundingClientRect().x,
+          y: this.one.getBoundingClientRect().y
+        },
+        {
+          x: this.two.getBoundingClientRect().x,
+          y: this.two.getBoundingClientRect().y
+        },
+        {
+          x: this.three.getBoundingClientRect().x,
+          y: this.three.getBoundingClientRect().y
+        },
+        {
+          x: this.four.getBoundingClientRect().x,
+          y: this.four.getBoundingClientRect().y
+        }
+      ];
+      allBullets.push(this);
+    }
+
+    ricochetVertical() {
+      if (this.impactCounter > 0) {
+        this.explode();
+      } else {
+        let absAngle = this.direction % 360;
+        let partialAngle = 180 - 2 * absAngle;
+        this.direction = absAngle + partialAngle + 180;
+        this.bulletCenter.style.transform = `rotate(${this.direction}deg)`;
+
+        this.impactCounter += 1;
+      }
+    }
+
+    ricochetHorizontal() {
+      if (this.impactCounter > 0) {
+        this.explode();
+      } else {
+        let absAngle = this.direction % 360;
+        let partialAngle = 180 - 2 * absAngle;
+        this.direction = absAngle + partialAngle;
+        this.bulletCenter.style.transform = `rotate(${this.direction}deg)`;
+
+        this.impactCounter += 1;
+      }
+    }
+
+    updatePoints() {
+      this.points = [
+        {
+          x: this.one.getBoundingClientRect().x,
+          y: this.one.getBoundingClientRect().y
+        },
+        {
+          x: this.two.getBoundingClientRect().x,
+          y: this.two.getBoundingClientRect().y
+        },
+        {
+          x: this.three.getBoundingClientRect().x,
+          y: this.three.getBoundingClientRect().y
+        },
+        {
+          x: this.four.getBoundingClientRect().x,
+          y: this.four.getBoundingClientRect().y
+        }
+      ];
+    }
+
+    explode() {
+      this.updatePoints();
+      let explosion = document.createElement("img");
+      explosion.src = `${ASSET_ROOT}/Smoke/smokeGrey0.png`;
+      explosion.style.position = "absolute";
+      explosion.style.width = "60px";
+      explosion.style.left = `${this.one.getBoundingClientRect().x - 30}px`;
+      explosion.style.top = `${this.one.getBoundingClientRect().y - 30}px`;
+
+      gameDiv.append(explosion);
+      this.bulletCenter.remove();
+      let opacity = 100;
+      let speed = 1000 / 60;
+      function fadeOut() {
+        opacity--;
+        explosion.style.opacity = opacity / 100;
+        if (opacity > 0) {
+          setTimeout(fadeOut, speed);
+        }
+      }
+      fadeOut();
+
+      let index = allBullets.indexOf(this);
+      if (index > -1) {
+        allBullets.splice(index, 1);
+      }
+    }
+
+    static all() {
+      return allBullets;
+    }
+  }
+
   tank1 = new Tank("red", 1);
   tank2 = new Tank("blue", 2);
-
-  document.addEventListener("DOMContentLoaded", function() {
-    tank1.setLives();
-    tank2.setLives();
-  });
+  tank1.setLives();
+  tank2.setLives();
 
   //create movement interval variables and set them to null
   let arrRightInt = null;
@@ -288,6 +951,81 @@ const renderGame = function() {
   let arrDownInt = null;
   let wInt = null;
   let sInt = null;
+
+  function doPolygonsIntersect(a, b) {
+    var polygons = [a, b];
+    var minA, maxA, projected, i, i1, j, minB, maxB;
+
+    for (i = 0; i < polygons.length; i++) {
+      // for each polygon, look at each edge of the polygon, and determine if it separates
+      // the two shapes
+      var polygon = polygons[i];
+      for (i1 = 0; i1 < polygon.length; i1++) {
+        // grab 2 vertices to create an edge
+        var i2 = (i1 + 1) % polygon.length;
+        var p1 = polygon[i1];
+        var p2 = polygon[i2];
+
+        // find the line perpendicular to this edge
+        var normal = { x: p2.y - p1.y, y: p1.x - p2.x };
+
+        minA = maxA = undefined;
+        // for each vertex in the first shape, project it onto the line perpendicular to the edge
+        // and keep track of the min and max of these values
+        for (j = 0; j < a.length; j++) {
+          projected = normal.x * a[j].x + normal.y * a[j].y;
+          if (typeof minA == "undefined" || projected < minA) {
+            minA = projected;
+          }
+          if (typeof maxA == "undefined" || projected > maxA) {
+            maxA = projected;
+          }
+        }
+
+        // for each vertex in the second shape, project it onto the line perpendicular to the edge
+        // and keep track of the min and max of these values
+        minB = maxB = undefined;
+        for (j = 0; j < b.length; j++) {
+          projected = normal.x * b[j].x + normal.y * b[j].y;
+          if (typeof minB == "undefined" || projected < minB) {
+            minB = projected;
+          }
+          if (typeof maxB == "undefined" || projected > maxB) {
+            maxB = projected;
+          }
+        }
+
+        // if there is no overlap between the projects, the edge we are looking at separates the two
+        // polygons, and we know there is no overlap
+        if (maxA < minB || maxB < minA) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function remedyTank2Rotation() {
+    if (arrRightInt !== null) {
+      let rotSpeed = -4;
+      tank2.rotate(rotSpeed);
+    }
+    if (arrLeftInt !== null && arrRightInt === null) {
+      let rotSpeed = 4;
+      tank2.rotate(rotSpeed);
+    }
+  }
+
+  function remedyTank1Rotation() {
+    if (dInt !== null && aInt === null) {
+      let rotSpeed = -4;
+      tank1.rotate(rotSpeed);
+    }
+    if (aInt !== null && dInt === null) {
+      let rotSpeed = 4;
+      tank1.rotate(rotSpeed);
+    }
+  }
 
   if (LAYOUT_CONFIG === "verticalLayout") {
     let centerOne = document.getElementById("center-one");

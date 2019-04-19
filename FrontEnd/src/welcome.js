@@ -1,12 +1,17 @@
+welcomePage = document.getElementById("welcome-page");
+gamePage = document.getElementById("game-page");
+gamePage.remove();
+
 playButton = document.getElementById("play-button");
-playerOneNameBox = document.getElementById("player-one-name");
-playerTwoNameBox = document.getElementById("player-two-name");
+playerOneNameBox = document.getElementById("p1-name");
+playerTwoNameBox = document.getElementById("p2-name");
 
 playButton.addEventListener("click", () => {
   playerOneName = playerOneNameBox.value;
   playerTwoName = playerTwoNameBox.value;
   if (playerOneName && playerTwoName) {
-    fetch("localhost:3000/players", {
+    console.log("in here");
+    fetch("https://localhost:3000/players", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -15,7 +20,7 @@ playButton.addEventListener("click", () => {
         name: playerOneName
       })
     }).then(
-      fetch("localhost:3000/players", {
+      fetch("https://localhost:3000/players", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -24,7 +29,7 @@ playButton.addEventListener("click", () => {
           name: playerTwoName
         })
       }).then(
-        fetch("localhost:3000/matches", {
+        fetch("https://localhost:3000/matches", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -36,7 +41,8 @@ playButton.addEventListener("click", () => {
         })
       )
     );
-    //   welcomepage.className = "hidden"
+    welcomePage.remove();
+    document.body.append(gamePage);
     renderGame();
   }
 });

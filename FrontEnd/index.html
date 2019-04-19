@@ -66,24 +66,25 @@
         background-image: url("./assets/tannerarmymen.png");
         
     }
-    #middleTitle{
-      position: absolute;
-      width: 50%;
-      top: 30%;
-      left: 24%;
+    #middleTitle{  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 40%; */
     }
     #left-index{
         position: absolute;
-        left:10%;
-        width: 100px;
+        left:30%;
+        width: 280px;
 
-        top: 50%;
+        top: 30%;
+        text-align: center;
     }
     #right-index{
         position: absolute;
         right:30%;
-        width: 100px;
-        top: 50%;
+        width: 280px;
+        top: 30%;
+        text-align: center;
     }
    
 
@@ -91,15 +92,42 @@
       position: absolute;
       display: block;
       width: 10%;
-      left: 44%;
+      left: 45%;
       border: none;
-      background-color: #4CAF50;
+      border-radius: 25px;
+      background-color: #161719;
       color: white;
       padding: 14px 28px;
       font-size: 16px;
       cursor: pointer;
       text-align: center;
       top: 70%
+    }
+
+    #title_background{
+  margin: auto;
+  width: 75%;
+  height: 150px; 
+    }
+
+    #p1-name{
+      border: 2px solid#a05555;
+      border-radius: 5px;
+    }
+
+    #p2-name{
+      border: 2px solid#0580c1;
+      border-radius: 5px;
+    }
+
+    .dark_background {
+  border-radius: 25px;
+  background: #161719;
+  padding: 20px; 
+    }
+
+    #white_text{
+      color:whitesmoke;
     }
     
     
@@ -110,27 +138,64 @@
   <body>
 
       <div id = "welcome-page">
-          
-              <img src = "./assets/block-title.png" id = "middleTitle" >
-              <div id = "left-index">
-                  <img id = "player-one-name" src = "./assets/player1.png"> <input type="text" id="p1-name" style="width: 150px;" />
+          <div class = "dark_background" id = "title_background">
+              <img src = "./assets/Toy-Tanks-Tournament_3.png" id = "middleTitle" >
+          </div>
+              <div class = "dark_background" id = "left-index">
+                  <img id = "player-one-name" src = "./assets/Enter-Player-One-Name.png"> <input type="text" id="p1-name" style="width: 150px;" /><br><br>
+                  <img id = "player-one-controls" src = "./assets/Player-One-Controls.png">
+                    <table id="white_text">
+                        <tr><td>Move Forward:</td><td>W</td></tr>
+                        <tr>
+                          <td>Move Backward:</td>
+                          <td>S</td>
+                        </tr>
+                        <tr>
+                          <td>Rotate Clockwise:</td>
+                          <td>D</td>
+                        </tr>
+                        <tr>
+                          <td>Rotate Counterclockwise:</td>
+                          <td>A</td>
+                        </tr>
+                        <tr>
+                          <td>Fire:</td>
+                          <td>E</td>
+                        </tr>
+                    </table>
               </div>
-              <div id = "right-index">
-                  <img id = "player-two-name" src = "./assets/player2.png"> <input type="text" id="p2-name" style="width: 150px;" />
+              <div class = "dark_background" id = "right-index">
+                  <img id = "player-two-name" src = "./assets/Enter-Player-Two-Name.png"> <input type="text" id="p2-name" style="width: 150px;" /><br><br><img id="player-two-controls" src="./assets/Player-Two-Controls.png">
+                    <table id="white_text">
+                        <tr><td>Move Forward:</td><td>Arrow Up</td></tr>
+                        <tr>
+                          <td>Move Backward:</td>
+                          <td>Arrow Down</td>
+                        </tr>
+                        <tr>
+                          <td>Rotate Clockwise:</td>
+                          <td>Arrow Right</td>
+                        </tr>
+                        <tr>
+                          <td>Rotate Counterclockwise:</td>
+                          <td>Arrow Left</td>
+                        </tr>
+                        <tr>
+                          <td>Fire:</td>
+                          <td>Spacebar</td>
+                        </tr>
+                    </table>
               </div>
               <button type = "button" id = "play-button">Play!</button>
           
       </div>
 
-<!-- 
+
 
       <div id = game-page></div>
         <div id="game_window" style="position: absolute"></div>
 
         <div id="menu_window">
-          <div id = "lives">
-
-          </div>
           
         </div>
       </div>
@@ -141,5 +206,6 @@
     <script type="text/javascript" src="src/collision.js"></script>
     <script type="text/javascript" src="src/Tank.js"></script>
     <script type="text/javascript" src="src/Bullet.js"></script>
-    <script type="text/javascript" src="src/index.js"></script> -->
+    <script type="text/javascript" src="src/index.js"></script>
+    <script type="text/javascript" src="src/welcome.js"></script>
 </html>
