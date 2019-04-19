@@ -1,6 +1,5 @@
 <style type = 'text/css'>
-    body,
-    html {
+    #welcome-page {
         height: 100%;
         margin: 0px;
         background-repeat: no-repeat;
@@ -15,15 +14,18 @@
         top: 15%;
         left: 40%;
     }
-    #left{
+    #left-index{
         position: absolute;
-        left:20%;
+        left:10%;
         top: 50%;
     }
-    #right{
+    #right-index{
         position: absolute;
         left:65%;
         top: 50%;
+    }
+    #welcome-text {
+        color: white;
     }
 
 
@@ -35,14 +37,17 @@
 <html>
 
     <body>
-        <h1 class = middleText>Welcome to ToyTanks</h1>
-        <div id = "left">
-            <h2 id = "player-one">Enter Player One: <input type="text" id="p1-name" style="width: 150px;" /></h2>
+        <div id = "welcome-page">
+            <div id = "welcome-text">
+                <h1 class = middleText>Welcome to ToyTanks</h1>
+                <div id = "left-index">
+                    <h2 id = "player-one-name">Enter Player One: <input type="text" id="p1-name" style="width: 150px;" /></h2>
+                </div>
+                <div id = "right-index">
+                    <h2 id = "player-two-name">Enter Player Two: <input type="text" id="p2-name" style="width: 150px;" /></h2>
+                </div>
+            </div>
         </div>
-        <div id = "right">
-            <h2 id = "player-two">Enter Player Two: <input type="text" id="p2-name" style="width: 150px;" /></h2>
-        </div>
-
     </body>
 
 </html>
