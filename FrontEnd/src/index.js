@@ -527,6 +527,23 @@ setInterval(function() {
   tank2.stockpile += 1;
 }, 1000);
 
+//HIGHLY EXPERIMENTAL:
+setInterval(function() {
+  Bullet.all().forEach(bullet => {
+    bullet.updatePoints();
+    otherBullets = Bullet.all().filter(otherBullet => {
+      return otherBullet !== bullet;
+    });
+    otherBullets.forEach(otherBullet => {
+      otherBullet.updatePoints();
+      if (doPolygonsIntersect(otherBullet.points, bullet.points)) {
+        otherBullet.explode();
+        bullet.explode();
+      }
+    });
+  });
+}, 100);
+
 //interval to update rotation of tanks and check for collision. If collision occurs, create a "bouncing" effect.
 setInterval(function() {
   tank1.tankDiv.style.transform = `rotate(${tank1.direction - 90}deg)`;
